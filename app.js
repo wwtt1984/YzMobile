@@ -20,7 +20,7 @@ Ext.Loader.setPath({
 Ext.ClassManager.setAlias('Ext.data.proxy.SkProxy', 'proxy.sk');
 
 Ext.application({
-    name: 'YzMobile222',
+    name: 'YzMobile',
 
     mapCenter: [29.83, 121.53, 6],
     zhujimapCenter: [29.83, 121.53],
