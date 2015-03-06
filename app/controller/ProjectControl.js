@@ -16,6 +16,7 @@ Ext.define('YzMobile.controller.ProjectControl', {
             info: 'main info',
             infofunction: '[itemId=infofunction]',
             projectlist: 'info projectlist',
+            projectmenu:'info projectmenu',
             projectdetail: 'info projectdetail',
             projecttree: '[itemId=projecttree]'
         },
@@ -31,12 +32,21 @@ Ext.define('YzMobile.controller.ProjectControl', {
     onProjectInitialize: function(){
 
         var me =  this;
-        me.onProjectTreeLoad();
-        me.projectlist = me.getProjectlist();
-        if(!me.projectlist){
-            me.projectlist= Ext.create('YzMobile.view.project.ProjectList');
-        }
-        me.getInfo().push(me.projectlist);
+
+        // 加载工情信息
+        //me.onProjectTreeLoad();
+        //me.projectlist = me.getProjectlist();
+        //if(!me.projectlist){
+        //    me.projectlist= Ext.create('YzMobile.view.project.ProjectList');
+        //}
+        //me.getInfo().push(me.projectlist);
+        //me.getMain().setActiveItem(me.getInfo());
+
+        debugger;
+        // 显示工情菜单
+        me.projectMenu = me.getProjectmenu();
+        if (!me.projectMenu) me.projectMenu = Ext.create('YzMobile.view.project.ProjectMenu');
+        me.getInfo().push(me.projectMenu);
         me.getMain().setActiveItem(me.getInfo());
     },
 

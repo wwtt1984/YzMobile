@@ -3,7 +3,8 @@ Ext.define('Ext.data.proxy.SkJsonp', {
 	singleton: true,///////////////////实例化单列/////////////////////////////
 	
     config: {
-        url: 'http://60.190.55.114/YzMobileWebService/Data_Ys.ashx',
+        //url: 'http://60.190.55.114/YzMobileWebService/Data_Ys.ashx',
+        url: 'http://115.236.169.28/webserca/data.ashx',
 //   		url: 'http://localhost/YzMobileWebService/Data_Ys.ashx',
 		callbackKey: 'callback'
     },
@@ -11,7 +12,7 @@ Ext.define('Ext.data.proxy.SkJsonp', {
 	validate: function(t,results, options) {
 		
         options = options || {};
-		
+
         Ext.applyIf(options, {
             scope: this,
             success: Ext.emptyFn,

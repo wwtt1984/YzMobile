@@ -1,20 +1,19 @@
 Ext.define('YzMobile.view.Info', {
     extend: 'Ext.navigation.View',
     xtype: 'info',
-    
-    requires: [
-    ],
+
+    requires: [],
     config: {
 
-    	navigationBar: {
-    		ui: 'light',
+        navigationBar: {
+            ui: 'light',
             layout: 'fit',
             items: [
                 {
-            	    xtype: 'button',
-            	    itemId: 'infofunction',
-            	    ui: 'back',
-            	    text: '主页面'
+                    xtype: 'button',
+                    itemId: 'infofunction',
+                    ui: 'back',
+                    text: '主页面'
                 },
                 {
                     xtype: 'button',
@@ -41,6 +40,20 @@ Ext.define('YzMobile.view.Info', {
 //                    docked: 'right',
                     right: 0,
                     hidden: true
+                },
+                {
+                    xtype: 'button',
+                    itemId: 'rainwarning',
+                    text: '降雨预警',
+                    right: 0,
+                    hidden: true
+                },
+                {
+                    xtype: 'button',
+                    itemId: 'waterwarning',
+                    text: '水位预警',
+                    right: 0,
+                    hidden: true
                 }
             ]
         },
@@ -50,9 +63,9 @@ Ext.define('YzMobile.view.Info', {
         defaultBackButtonText: '返回'
     },
 
-    onImageShow: function(values){
+    onImageShow: function (values) {
         this.view = this.down('newsimg');
-        if(!this.view){
+        if (!this.view) {
             this.view = Ext.create('YzMobile.view.mark.NewsImg');
         }
 
@@ -64,14 +77,14 @@ Ext.define('YzMobile.view.Info', {
         this.view.show();
     },
 
-    onViewHide: function(){
+    onViewHide: function () {
         this.view.hide();
         this.view.destroy();
     },
 
-    onPhotoShow: function(id, index){
+    onPhotoShow: function (id, index) {
         this.view = this.down('newsimg');
-        if(!this.view){
+        if (!this.view) {
             this.view = Ext.create('YzMobile.view.mark.NewsImg');
         }
 
@@ -83,7 +96,7 @@ Ext.define('YzMobile.view.Info', {
         this.view.show();
     },
 
-    onPhotoDelete: function(){
+    onPhotoDelete: function () {
         this.view.onPhotoDelete();
     }
 });

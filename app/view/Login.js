@@ -38,14 +38,15 @@ Ext.define('YzMobile.view.Login', {
                                 id: 'name',
                                 name: 'name',
                                 label: '用户名',
-                                value: 'admin'
+                                value: 'liuxin'
                             },
                             {
                                 xtype: 'passwordfield',
                                 id: 'password',
                                 name: 'password',
                                 label: '密码',
-                                value: 'eXpzbGoxMjM='
+                                //value: 'eXpzbGoxMjM='
+                                value:'123'
                             }]
                     },
                     {

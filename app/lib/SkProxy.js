@@ -3,7 +3,8 @@ Ext.define('Ext.data.proxy.SkProxy', {
     alias: 'proxy.sk',
 		
     config: {
-        url: 'http://60.190.55.114/YzMobileWebService/Data_Ys.ashx',
+        //url: 'http://60.190.55.114/YzMobileWebService/Data_Ys.ashx',
+        url: 'http://115.236.169.28/webserca/data.ashx',
 //        url: 'http://localhost/YzMobileWebService/Data_Ys.ashx',
         callbackKey: 'callback'
     },

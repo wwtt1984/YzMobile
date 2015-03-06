@@ -19,25 +19,23 @@ Ext.define('YzMobile.controller.WeatherControl', {
             weather: 'info weather'
         },
 
-        control: {
-
-        }
+        control: {}
     },
 
     //天气预报页面初始化
-    onWeatherInitialize: function(){
+    onWeatherInitialize: function () {
         var me = this;
 
         me.weather = me.getWeather();
-        if(!me.weather){
-            me.weather= Ext.create('YzMobile.view.weather.Weather');
+        if (!me.weather) {
+            me.weather = Ext.create('YzMobile.view.weather.Weather');
         }
 
         me.getApplication().getController('MainControl').getInfosearch().show();
-        me.onWeatherStoreLoad('宁波', 0);
+        me.onWeatherStoreLoad('杭州', 0);
     },
 
-    onWeatherStoreLoad: function(city, index){
+    onWeatherStoreLoad: function (city, index) {
 
         var me = this;
 
@@ -49,14 +47,13 @@ Ext.define('YzMobile.controller.WeatherControl', {
             results: city
         });
 
-        store.load(function(records, operation, success) {
-            if(!success)
-            {
-                plugins.Toast.ShowToast("网络不给力，无法读取数据!",3000);
+        store.load(function (records, operation, success) {
+            if (!success) {
+                plugins.Toast.ShowToast("网络不给力，无法读取数据!", 3000);
             }
-            else{
+            else {
                 me.weather.onDataSet(records[0]);
-                if(index == 0){
+                if (index == 0) {
                     me.getInfo().push(me.weather);
                     me.getMain().setActiveItem(me.getInfo());
                 }
@@ -68,18 +65,18 @@ Ext.define('YzMobile.controller.WeatherControl', {
     },
 
     //按日期查询水位过程线
-    onWeatherPick: function(){
+    onWeatherPick: function () {
 
         var me = this;
 
-        if(!me.onPicker){
+        if (!me.onPicker) {
             me.onPicker = Ext.create('Ext.picker.Picker', {
 
                 slots: [
                     {
                         name: 'city',
                         title: '城市',
-                        align : 'center',
+                        align: 'center',
                         data: [
                             {text: '宁波', value: '宁波'},
                             {text: '杭州', value: '杭州'},
@@ -96,7 +93,7 @@ Ext.define('YzMobile.controller.WeatherControl', {
                     text: '取消'
                 },
                 listeners: {
-                    change: function(t, value, op) {
+                    change: function (t, value, op) {
                         me.onWeatherStoreLoad(value.city, 1);
                     }
                 }

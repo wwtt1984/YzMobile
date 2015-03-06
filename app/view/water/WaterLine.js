@@ -21,7 +21,7 @@ Ext.define('YzMobile.view.water.WaterLine', {
         items: [
             {
                 xtype: 'titlebar',
-                itemId: 'waterlinetitle',
+                itemId: 'waterlinetitle1',
                 style: 'height:1.6em;font-size:14px;text-align:center;',
                 ui: 'plain',
                 title: '2014-08-14水位过程线'
@@ -118,7 +118,7 @@ Ext.define('YzMobile.view.water.WaterLine', {
 
         Ext.ComponentQuery.query('#waterchart')[0]._axes[0].setMaximum(parseFloat(record.data.max) + 5.00);
 
-        Ext.ComponentQuery.query('#waterlinetitle')[0].setTitle(date);
+        Ext.ComponentQuery.query('#waterlinetitle1')[0].setTitle(date);
         me.setTitle(record.data.stnm);
         Ext.ComponentQuery.query('#waterchart')[0]._axes[1].setTitle(date);
 //        Ext.ComponentQuery.query('#waterchart')[0].redraw();
@@ -138,7 +138,8 @@ Ext.define('YzMobile.view.water.WaterLine', {
         Ext.ComponentQuery.query('#waterchart')[0]._axes[0].setMaximum(max + 5.00);
         Ext.ComponentQuery.query('#waterchart')[0]._axes[0].setMinimum(Math.max(min,0));
 
-        Ext.ComponentQuery.query('#rainlinetitle')[0].setTitle(title);
+        //Ext.ComponentQuery.query('#rainlinetitle')[0].setTitle(title);
+        Ext.ComponentQuery.query('#waterlinetitle1')[0].setTitle(title);
 
         Ext.ComponentQuery.query('#waterchart')[0]._axes[1].setTitle('时间');
 //        Ext.ComponentQuery.query('#waterchart')[0].redraw();

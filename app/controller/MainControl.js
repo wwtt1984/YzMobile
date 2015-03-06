@@ -69,7 +69,7 @@ Ext.define('YzMobile.controller.MainControl', {
         YzMobile.app.mainthis = this;
 
         me.onBtnConfirm();
-        me.onUserDataFile();
+        //me.onUserDataFile();
         //android返回键事件监听s
         document.addEventListener("backbutton", me.onBackKeyDown, false);
     },
@@ -298,7 +298,7 @@ Ext.define('YzMobile.controller.MainControl', {
             //用户名、密码输入完整
             var store = Ext.getStore('UserStore');
 
-            var results = YzMobile.app.user.sid + '$' + YzMobile.app.user.password;
+            var results = YzMobile.app.user.sid + '$' + YzMobile.app.user.password + '$' + '1.0.0.1';
             store.getProxy().setExtraParams({
                 t: 'Login',
                 results: results
@@ -449,10 +449,10 @@ Ext.define('YzMobile.controller.MainControl', {
                 break;
             case titlestr[6]:
                 me.getApplication().getController('ProjectControl').onProjectInitialize();
-                break
+                break;
             case titlestr[7]:
                 me.getApplication().getController('BaseControl').onBaseInitialize();
-                break
+                break;
         }
 //        me.getMain().setActiveItem(me.getInfo());
     },
