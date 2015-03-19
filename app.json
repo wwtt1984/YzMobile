@@ -40,7 +40,7 @@
      */
     "js": [
 		{
-			"path": "phonegap.js",
+			"path": "cordova.js",
 			"remote": true
 		},
         {
@@ -112,7 +112,6 @@
      * Extra resources to be copied along when build
      */
     "resources": [
-		"config.xml",
         "resources/images",
         "resources/icons",
         "resources/startup"

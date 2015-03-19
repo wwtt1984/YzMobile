@@ -63,32 +63,22 @@ Ext.define('YzMobile.controller.WaterControl', {
         var store = Ext.getStore('WaterStore')
 
         // 统计数据, 1, 24小时内降水超过30的, 以及最大的降雨测站
-        var warning1h = 0, warning24h = 0, maxRain = 0;
+        var max = 0;
         for (var i = 0; i < store.getCount(); i++) {
             var record = store.getAt(i);
-            var num1h = parseFloat(record.get('rain1h'));
-            var num24h = parseFloat(record.get('raintoday'));
-
-            if (num1h > 30) warning1h++;
-            if (num24h > 30) warning24h++;
-            if (num24h > maxRain) maxRain = num24h;
+            var num = parseFloat(record.get('max'));
+            if (max < num) max = num;
         }
 
         // 将多个最大的降雨测站信息连接成字符串
-        var maxStation = "";
+        var html = '<h1 style="text-align: center; color: #ff0000">预警信息</h1><h2 style="font-size: 22px">最高水位:</h2><p style="font-size: 18px; color: deeppink; margin-left: 16px">';
         for (var j = 0; j < store.getCount(); j++) {
-            var record2 = store.getAt(j);
-            if (parseFloat(record2.get('raintoday')) == maxRain) {
-                if (maxStation != "") maxStation += ", ";
-                maxStation += record2.get('stnm') + "(" + record2.get('raintoday') + "mm)";
+            var record = store.getAt(j);
+            if (parseFloat(record.get('max')) == max) {
+                html += record.get('stnm') + '(' + record.get('maxTime') + ')<br/>';
             }
         }
-
-        // 拼接成要显示的html内容
-        var html = '<h1 style="text-align: center; color: #ff0000">预警信息</h1><h2 style="font-size: 22px">当日最大降雨测站</h2><p style="font-size: 18px; color: deeppink; margin-left: 16px">' + maxStation +
-            '</p><h2 style="font-size: 22px">24h超过30mm测站个数</h2><p style="font-size: 18px; color: deeppink; margin-left: 16px">' + warning24h + '个</p>' +
-            '<h2 style="font-size: 22px">1h超过30mm测站个数</h2><p style="font-size: 18px; color: deeppink; margin-left: 16px">' + warning1h + '个</p>';
-
+        html += '</h2>';
 
         if (!this.warnOverlay) {
             this.warnOverlay = Ext.Viewport.add({
@@ -102,10 +92,7 @@ Ext.define('YzMobile.controller.WaterControl', {
                 items: [
                     {
                         styleHtmlContent: true,
-                        html: '<h1 style="text-align: center; color: #ff0000">预警信息</h1>' +
-                        '<h2 style="font-size: 22px">最高水位:</h2><p style="font-size: 18px; color: deeppink; margin-left: 16px">皎口坝下  27.15(17.35)<br>皎口坝下  27.15(17.35)</p>' +
-                        '<h2 style="font-size: 22px">24h超过警戒值测站个数</h2><p style="font-size: 18px; color: deeppink; margin-left: 16px">10个</p>' +
-                        '<h2 style="font-size: 22px">1h超过警戒值测站个数</h2><p style="font-size: 18px; color: deeppink; margin-left: 16px">5个</p>'
+                        html: html
                     }
                 ]
             });

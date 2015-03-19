@@ -30,7 +30,8 @@ Ext.define('YzMobile.controller.MainControl', {
             enddate: '[itemId=enddate]',
             dateconfirm: '[itemId=dateconfirm]',
 
-            load: '[itemId=load]'
+            load: '[itemId=load]',
+            contactList:'contactList'
         },
 
         control: {
@@ -60,6 +61,15 @@ Ext.define('YzMobile.controller.MainControl', {
             },
             dateconfirm: {
                 tap: 'onDateConfirmTap'
+            },
+            contactList:{
+                initialize: function () {
+                    var store = Ext.getStore('ContactTreeStore');
+                    store.getProxy().setExtraParams({
+                        t:'GetAdressTree'
+                    });
+                    store.load();
+                }
             }
         }
     },
@@ -422,7 +432,7 @@ Ext.define('YzMobile.controller.MainControl', {
 
         me.getMain().add(me.info);
 
-        var titlestr = ['rain', 'water', 'weather', 'land', 'gis', 'typhoon', 'project', 'base'];
+        var titlestr = ['rain', 'water', 'weather', 'land', 'gis', 'typhoon', 'project', 'base', 'contact'];
 
         switch(record.data.name){
             case titlestr[0]:
@@ -452,6 +462,11 @@ Ext.define('YzMobile.controller.MainControl', {
                 break;
             case titlestr[7]:
                 me.getApplication().getController('BaseControl').onBaseInitialize();
+                break;
+            case titlestr[8]:
+                var view = Ext.create('YzMobile.view.contact.ContactList');
+                this.getInfo().push(view);
+                this.getMain().setActiveItem(me.getInfo());
                 break;
         }
 //        me.getMain().setActiveItem(me.getInfo());

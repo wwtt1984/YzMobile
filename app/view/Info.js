@@ -54,6 +54,14 @@ Ext.define('YzMobile.view.Info', {
                     text: '水位预警',
                     right: 0,
                     hidden: true
+                },
+                {
+                    xtype: 'button',
+                    itemId: 'modelsearch', // 搜索水库,大坝等模块
+                    ui:'plain',
+                    iconCls:'search',
+                    right: 0,
+                    hidden: true
                 }
             ]
         },

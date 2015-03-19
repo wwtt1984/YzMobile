@@ -20,7 +20,8 @@ Ext.define('YzMobile.store.FunctionStore', {
             {id: '05', name: 'land', title: '气象国土', url: 'resources/images/function/radar.png'},
             {id: '06', name: 'gis', title: 'GIS应用', url: 'resources/images/function/notice.png'},
             {id: '07', name: 'typhoon', title: '台风信息', url: 'resources/images/function/typhoon.png'},
-            {id: '08', name: 'base', title: '基本信息', url: 'resources/images/function/info.png'}
+            {id: '08', name: 'base', title: '基本信息', url: 'resources/images/function/info.png'},
+            {id: '09', name: 'contact', title: '防汛通讯录', url: 'resources/images/function/info.png'}
 //            {id: '12', name: 'settings', title: '设置', url: 'resources/images/function/setting.png'}
         ],
 
