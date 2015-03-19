@@ -63,13 +63,7 @@ Ext.define('YzMobile.controller.MainControl', {
                 tap: 'onDateConfirmTap'
             },
             contactList:{
-                initialize: function () {
-                    var store = Ext.getStore('ContactTreeStore');
-                    store.getProxy().setExtraParams({
-                        t:'GetAdressTree'
-                    });
-                    store.load();
-                }
+
             }
         }
     },
@@ -465,8 +459,7 @@ Ext.define('YzMobile.controller.MainControl', {
                 break;
             case titlestr[8]:
                 var view = Ext.create('YzMobile.view.contact.ContactList');
-                this.getInfo().push(view);
-                this.getMain().setActiveItem(me.getInfo());
+                me.getMain().setActiveItem(view);
                 break;
         }
 //        me.getMain().setActiveItem(me.getInfo());
