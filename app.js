@@ -164,7 +164,8 @@ Ext.application({
         'TfControl',
         'ProjectControl',
         'BaseControl',
-        'ProjectMenuControl'
+        'ProjectMenuControl',
+        'ContactControl'
     ],
 
     icon: {
