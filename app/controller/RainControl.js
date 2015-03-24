@@ -119,9 +119,9 @@ Ext.define('YzMobile.controller.RainControl', {
         }
 
         // 拼接成要显示的html内容
-        var html = '<h1 style="text-align: center; color: #ff0000">预警信息</h1><h2 style="font-size: 22px">当日最大降雨测站</h2><p style="font-size: 18px; color: deeppink; margin-left: 16px">' + maxStation +
-            '</p><h2 style="font-size: 22px">24h超过30mm测站个数</h2><p style="font-size: 18px; color: deeppink; margin-left: 16px">' + warning24h + '个</p>' +
-            '<h2 style="font-size: 22px">1h超过30mm测站个数</h2><p style="font-size: 18px; color: deeppink; margin-left: 16px">' + warning1h + '个</p>';
+        var html = '<h1 style="text-align: center; color: #ff0000">预警信息</h1><h2 style="font-size: 22px">当日最大降雨测站</h2><p style="font-size: 18px; color: deeppink; margin-left: 16px">' + (maxRain > 0 ? maxStation : '均无降雨') +
+        '</p><h2 style="font-size: 22px">24h超过30mm测站个数</h2><p style="font-size: 18px; color: deeppink; margin-left: 16px">' + warning24h + '个</p>' +
+        '<h2 style="font-size: 22px">1h超过30mm测站个数</h2><p style="font-size: 18px; color: deeppink; margin-left: 16px">' + warning1h + '个</p>';
 
         if (!this.warnOverlay) {
             this.warnOverlay = Ext.Viewport.add({
