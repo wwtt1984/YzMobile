@@ -174,4 +174,4 @@ Ext.define('YzMobile.view.gis.GMap', {
             makerarr[i].setMap(me.map);
         }
     }
-})
+});
