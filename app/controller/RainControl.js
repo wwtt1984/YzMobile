@@ -97,14 +97,18 @@ Ext.define('YzMobile.controller.RainControl', {
         var store = Ext.getStore('RainStore')
 
         // 统计数据, 1, 24小时内降水超过30的, 以及最大的降雨测站
-        var warning1h = 0, warning24h = 0, maxRain = 0;
+        var warning1h = 0, warning3h = 0, warning24h = 0, maxRain = 0, danger1h = 0, danger3h = 0, danger24h = 0;
         for (var i = 0; i < store.getCount(); i++) {
             var record = store.getAt(i);
-            var num1h = parseFloat(record.get('rain1h'));
             var num24h = parseFloat(record.get('raintoday'));
 
-            if (num1h > 30) warning1h++;
-            if (num24h > 30) warning24h++;
+            debugger;
+            if (record.get('Warn1h') == 'true') warning1h++;
+            if (record.get('Warn3h') == 'true') warning3h++;
+            if (record.get('Warn24h') == 'true') warning24h++;
+            if (record.get('Danger1h') == 'true') danger1h++;
+            if (record.get('Danger3h') == 'true') danger3h++;
+            if (record.get('Danger24h') == 'true') danger24h++;
             if (num24h > maxRain) maxRain = num24h;
         }
 
@@ -120,26 +124,29 @@ Ext.define('YzMobile.controller.RainControl', {
 
         // 拼接成要显示的html内容
         var html = '<h1 style="text-align: center; color: #ff0000">预警信息</h1><h2 style="font-size: 22px">当日最大降雨测站</h2><p style="font-size: 18px; color: deeppink; margin-left: 16px">' + (maxRain > 0 ? maxStation : '均无降雨') +
-        '</p><h2 style="font-size: 22px">24h超过30mm测站个数</h2><p style="font-size: 18px; color: deeppink; margin-left: 16px">' + warning24h + '个</p>' +
-        '<h2 style="font-size: 22px">1h超过30mm测站个数</h2><p style="font-size: 18px; color: deeppink; margin-left: 16px">' + warning1h + '个</p>';
+            '</p><h2 style="font-size: 20px">1h超预警测站个数</h2><p style="font-size: 16px; color: deeppink; margin-left: 16px">' + warning1h + '个</p>' +
+            '<h2 style="font-size: 20px">3h超预警测站个数</h2><p style="font-size: 16px; color: deeppink; margin-left: 16px">' + warning3h + '个</p>' +
+            '<h2 style="font-size: 20px">24h超预警测站个数</h2><p style="font-size: 16px; color: deeppink; margin-left: 16px">' + warning24h + '个</p>' +
+            '<h2 style="font-size: 20px">1h危险测站个数</h2><p style="font-size: 16px; color: deeppink; margin-left: 16px">' + danger1h + '个</p>' +
+            '<h2 style="font-size: 20px">3h危险测站个数</h2><p style="font-size: 16px; color: deeppink; margin-left: 16px">' + danger3h + '个</p>' +
+            '<h2 style="font-size: 20px">24h危险测站个数</h2><p style="font-size: 16px; color: deeppink; margin-left: 16px">' + danger24h + '个</p>';
 
-        if (!this.warnOverlay) {
-            this.warnOverlay = Ext.Viewport.add({
-                xtype: 'panel',
-                width: '80%',
-                height: '55%',
-                modal: true,
-                centered: true,
-                hideOnMaskTap: true,
-                scrollable: true,
-                items: [
-                    {
-                        styleHtmlContent: true,
-                        html: html
-                    }
-                ]
-            });
-        }
+        // 显示预警信息的panel
+        this.warnOverlay = Ext.Viewport.add({
+            xtype: 'panel',
+            width: '80%',
+            height: '55%',
+            modal: true,
+            centered: true,
+            hideOnMaskTap: true,
+            scrollable: true,
+            items: [
+                {
+                    styleHtmlContent: true,
+                    html: html
+                }
+            ]
+        });
         this.warnOverlay.show();
     },
 

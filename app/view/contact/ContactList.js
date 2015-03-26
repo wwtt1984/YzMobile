@@ -3,7 +3,7 @@
  */
 
 Ext.define('YzMobile.view.contact.ContactList', {
-    extend: 'Ext.NestedList',
+    extend: 'Ext.dataview.NestedList',
     xtype: 'contactList',
 
     // 编辑显示内容的模板
@@ -16,11 +16,38 @@ Ext.define('YzMobile.view.contact.ContactList', {
     //},
 
     config: {
-        title:'通讯录',
+        title: '通讯录',
+        fullscreen: true,
         displayField: 'fileName',
         store: 'ContactTreeStore',
         toolbar: {
-            items: [{xtype: 'spacer'}, {xtype: 'button', ui: 'back', iconMask: true, itemId: 'backBtn', text: '返回'}, {xtype:'button', itemId:'contactSearch', text:'搜索', docked:'right'}]
+            layout: 'fit', // 若没有, spacer无法使按钮靠右边!重要!!!
+            items: [
+                {xtype: 'button', itemId: 'backBtn', ui: 'back', text: '主界面'},
+                {xtype: 'spacer'},
+                {xtype: 'button', itemId: 'contactSearch', ui: 'plain', iconCls: 'search'}
+            ]
+        }
+    },
+
+    listeners: {
+        leafitemtap: function (me, list, index, target, record, e, eOpts) {
+            debugger;
+            //var panel = Ext.Viewport.add({
+            //    docked: 'bottom',
+            //    modal: true,
+            //    centered: true,
+            //    hideOnMaskTap: true,
+            //    padding: 10,
+            //    items: [
+            //        {xtype: 'button', text: record.data.mobile}
+            //    ]
+            //});
+            //
+            //panel.showBy(target);
+            var popup = Ext.create('YzMobile.view.contact.ContactPopup');
+            popup.onDataSet(record);
+            popup.showBy(target);
         }
     }
 

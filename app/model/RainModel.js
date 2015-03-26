@@ -2,7 +2,7 @@
  * Created by USER on 14-4-28.
  */
 
-Ext.define('YzMobile.model.RainModel',{
+Ext.define('YzMobile.model.RainModel', {
     extend: 'Ext.data.Model',
     config: {
         idProperty: 'stcd',
@@ -12,7 +12,15 @@ Ext.define('YzMobile.model.RainModel',{
             'rain1h',
             'rain3h',
             'raintoday',
-            'type'
+            'type',
+            'x',
+            'y',
+            'Warn1h',
+            'Danger1h',
+            'Warn3h',
+            'Danger3h',
+            'Warn24h',
+            'Danger24h'
         ]
     }
 

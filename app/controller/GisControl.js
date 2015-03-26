@@ -19,20 +19,65 @@ Ext.define('YzMobile.controller.GisControl', {
 //            gismap: 'info gismap'
             gismain: 'info gismain',
             gmap: '[itemId=gmap]',
-            gistitle: '[itemId=gistitle]'
+            gistitle: '[itemId=gistitle]',
+            showplace: '[itemId=showplace]' // 选择显示站点的按钮
         },
 
         control: {
+            gismain: {
+                show: function () {
+                    this.getShowplace().show();
+                },
+                hide: function () {
+                    this.getShowplace().hide();
+                }
+            },
+
+            showplace: {
+                tap: function () {
+                    // 筛选地图上需要显示的站点
+                    Ext.create('Ext.Panel', {
+                        layout: {
+                            type: 'vbox',
+                            aligh: 'end'
+                        },
+                        left: 0,
+                        padding: 10,
+                        width: '50%',
+                        height: '40%',
+                        modal: true,
+                        hideOnMaskTap: true,
+                        scrollable: true,
+                        items: [
+                            {
+                                xtype: 'panel',
+                                layout: {type: 'hbox', aligh: 'center'},
+                                items: [{html: '雨量站'}, {xtype: 'checkboxfield'}]
+                            },
+                            {
+                                xtype: 'panel',
+                                layout: {type: 'hbox', aligh: 'center'},
+                                items: [{html: '水位站'}, {xtype: 'checkboxfield'}]
+                            },
+                            {
+                                xtype: 'panel',
+                                layout: {type: 'hbox', aligh: 'center'},
+                                items: [{html: '水位雨量站'}, {xtype: 'checkboxfield'}]
+                            }
+                        ]
+                    }).showBy(this.getShowplace());
+                }
+            }
         }
     },
 
     //Gis页面初始化
-    onGisMapInitialize: function(){
+    onGisMapInitialize: function () {
 
         var me = this;
 
         me.gismain = me.getGismain();
-        if(!me.gismain){
+        if (!me.gismain) {
             me.gismain = Ext.create('YzMobile.view.gis.GisMain');
         }
         me.getGistitle().setData([]);

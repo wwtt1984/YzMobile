@@ -78,12 +78,18 @@ Ext.application({
         'project.ProjectMenu',
         'project.ProjectMenuPart',
         'project.ProjectMenuDetail',
+        'project.Search',
+
 
         'base.BaseList',
         'base.BaseDetail',
 
-        'project.Search',
-        'contact.ContactList'
+        'contact.ContactList',
+        'contact.ContactSearch',
+        'contact.ContactPopup',
+
+        'plan.PlanList',
+        'plan.PlanSearch'
     ],
 
     models: [
@@ -116,7 +122,10 @@ Ext.application({
         'ProjectMenuPartModel',
         'NameValueModel',
         'SearchModel',
-        'ContactTreeModel'
+        'ContactTreeModel',
+        'ContactSearchModel',
+        'PlanModel',
+        'PlanSearchModel'
 
     ],
 
@@ -150,7 +159,10 @@ Ext.application({
         'ProjectMenuPartStore',
         'NameValueStore',
         'SearchStore',
-        'ContactTreeStore'
+        'ContactTreeStore',
+        'ContactSearchStore',
+        'PlanStore',
+        'PlanSearchStore'
 
     ],
 
@@ -165,7 +177,9 @@ Ext.application({
         'ProjectControl',
         'BaseControl',
         'ProjectMenuControl',
-        'ContactControl'
+        'ContactControl',
+        'PlanControl'
+
     ],
 
     icon: {

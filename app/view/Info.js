@@ -58,8 +58,15 @@ Ext.define('YzMobile.view.Info', {
                 {
                     xtype: 'button',
                     itemId: 'modelsearch', // 搜索水库,大坝等模块
-                    ui:'plain',
-                    iconCls:'search',
+                    ui: 'plain',
+                    iconCls: 'search',
+                    right: 0,
+                    hidden: true
+                },
+                {
+                    xtype: 'button',
+                    itemId: 'showplace', // 显示站点
+                    text: '筛选',
                     right: 0,
                     hidden: true
                 }

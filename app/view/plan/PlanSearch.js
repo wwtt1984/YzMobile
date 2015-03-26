@@ -1,16 +1,13 @@
 /**
- * Created by USER on 14-4-3.
+ * Created by kukiss on 2015/3/25 0025.
  */
-
-Ext.define('YzMobile.view.project.Search', {
+Ext.define('YzMobile.view.plan.PlanSearch', {
     extend: 'Ext.List',
-    xtype: 'search',
-
-    requires: [],
+    xtype: 'planSearch',
 
     config: {
-        title: '工情搜索',
-        itemId: 'ctsearch',
+        title: '预案搜索',
+        itemId: 'plsearch',
 
         cls: 'contact-list',
 
@@ -19,15 +16,14 @@ Ext.define('YzMobile.view.project.Search', {
         //itemTpl defines the template for each item in the list
         itemTpl: Ext.create('Ext.XTemplate',
             '<div class="contact-list-item">',
-            '    <h1>{rsnm}&nbsp;&nbsp;{MyType}</h1>',
+            '    <h1>{planNM}&nbsp;&nbsp;</h1>',
             '</div>'
         ),
 
         //give it a link to the store instance
         store: {
-            model: 'YzMobile.model.SearchModel'
+            model: 'YzMobile.model.PlanSearchModel'
         },
-
         useSimpleItems: true,
 
         emptyText: '<div style="margin-top: 20px; text-align: center">无匹配的记录</div>',
@@ -49,32 +45,39 @@ Ext.define('YzMobile.view.project.Search', {
                         style: 'width:96%; border: none;margin: 0 2% 0 2%;',
                         listeners: {
                             clearicontap: function () {
-                                Ext.ComponentQuery.query('#ctsearch')[0].onSearchClearIconTap();
+                                Ext.ComponentQuery.query('#plsearch')[0].onSearchClearIconTap();
                             },
                             keyup: function (field) {
-                                Ext.ComponentQuery.query('#ctsearch')[0].onSearchKeyUp(field);
+                                Ext.ComponentQuery.query('#plsearch')[0].onSearchKeyUp(field);
                             }
                         }
                     }
                 ]
             }
-        ]
+        ],
+
+        listeners: {
+            itemtap: function (list, index, target, record, e, eOpts) {
+
+            }
+        }
     },
 
     onSearchKeyUp: function (field) {
         //get the store and the value of the field
         var value = field.getValue(),
-            store = Ext.getStore('SearchStore');
+            store = Ext.getStore('PlanSearchStore');
 
         var me = this;
 
         //first clear any current filters on the store. If there is a new value, then suppress the refresh event
-            store.clearFilter(!!value);
+        store.clearFilter(!!value);
 
-        //check if a value is set first, as if it isnt we dont have to do anything
         if (value) {
+
             store.filter([{
                 filterFn: function (item) {
+                    debugger;
                     return item.get('MySearchName').toUpperCase().indexOf(value.toUpperCase()) >= 0;
                 }
             }]);
@@ -86,7 +89,7 @@ Ext.define('YzMobile.view.project.Search', {
     onSearchClearIconTap: function () {
         var me = this;
         //call the clearFilter method on the store instance
-        Ext.getStore('SearchStore').clearFilter();
+        Ext.getStore('PlanSearchStore').clearFilter();
         me.getStore().removeAll();
     }
 });

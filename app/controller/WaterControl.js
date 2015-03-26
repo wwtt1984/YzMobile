@@ -60,43 +60,43 @@ Ext.define('YzMobile.controller.WaterControl', {
     /* 显示预警信息的弹窗 */
     onWarningTap: function () {
 
-        var store = Ext.getStore('WaterStore')
+        var store = Ext.getStore('WaterStore');
 
         // 统计数据, 1, 24小时内降水超过30的, 以及最大的降雨测站
-        var max = 0;
+        var max = 0, warn = 0, danger = 0;
         for (var i = 0; i < store.getCount(); i++) {
             var record = store.getAt(i);
             var num = parseFloat(record.get('max'));
             if (max < num) max = num;
+            if (record.get('Warn') == 'true') warn++;
+            if (record.get('Danger') == 'true') danger++;
         }
 
         // 将多个最大的降雨测站信息连接成字符串
-        var html = '<h1 style="text-align: center; color: #ff0000">预警信息</h1><h2 style="font-size: 22px">最高水位:</h2><p style="font-size: 18px; color: deeppink; margin-left: 16px">';
+        var html = '<h1 style="text-align: center; color: #ff0000">预警信息</h1><h2 style="font-size: 20px">最高水位:</h2><p style="font-size: 18px; color: deeppink; margin-left: 16px">';
         for (var j = 0; j < store.getCount(); j++) {
             var record = store.getAt(j);
             if (parseFloat(record.get('max')) == max) {
                 html += record.get('stnm') + '(' + record.get('maxTime') + ')<br/>';
             }
         }
-        html += '</h2>';
+        html += '</p>' + '<h2 style="font-size: 20px">危险测站个数</h2><p style="font-size: 16px; color: deeppink; margin-left: 16px">' + danger + '个</p><h2 style="font-size: 20px">超预警测站个数</h2><p style="font-size: 16px; color: deeppink; margin-left: 16px">' + warn + '个</p>';
 
-        if (!this.warnOverlay) {
-            this.warnOverlay = Ext.Viewport.add({
-                xtype: 'panel',
-                width: '80%',
-                height: '55%',
-                modal: true,
-                centered: true,
-                hideOnMaskTap: true,
-                scrollable: true,
-                items: [
-                    {
-                        styleHtmlContent: true,
-                        html: html
-                    }
-                ]
-            });
-        }
+        this.warnOverlay = Ext.Viewport.add({
+            xtype: 'panel',
+            width: '80%',
+            height: '55%',
+            modal: true,
+            centered: true,
+            hideOnMaskTap: true,
+            scrollable: true,
+            items: [
+                {
+                    styleHtmlContent: true,
+                    html: html
+                }
+            ]
+        });
         this.warnOverlay.show();
     },
 

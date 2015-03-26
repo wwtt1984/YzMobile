@@ -426,7 +426,7 @@ Ext.define('YzMobile.controller.MainControl', {
 
         me.getMain().add(me.info);
 
-        var titlestr = ['rain', 'water', 'weather', 'land', 'gis', 'typhoon', 'project', 'base', 'contact'];
+        var titlestr = ['rain', 'water', 'weather', 'land', 'gis', 'typhoon', 'project', 'base', 'contact','plan'];
 
         switch(record.data.name){
             case titlestr[0]:
@@ -459,6 +459,10 @@ Ext.define('YzMobile.controller.MainControl', {
                 break;
             case titlestr[8]:
                 var view = Ext.create('YzMobile.view.contact.ContactList');
+                me.getMain().setActiveItem(view);
+                break;
+            case titlestr[9]:
+                var view = Ext.create('YzMobile.view.plan.PlanList');
                 me.getMain().setActiveItem(view);
                 break;
         }

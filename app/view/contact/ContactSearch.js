@@ -18,13 +18,13 @@ Ext.define('YzMobile.view.contact.ContactSearch', {
         //itemTpl defines the template for each item in the list
         itemTpl: Ext.create('Ext.XTemplate',
             '<div class="contact-list-item">',
-            '    <h1>{rsnm}&nbsp;&nbsp;{MyType}</h1>',
+            '    <h1>{personNM}&nbsp;&nbsp;{mobile}</h1>',
             '</div>'
         ),
 
         //give it a link to the store instance
         store: {
-            model: 'YzMobile.model.SearchModel'
+            model: 'YzMobile.model.ContactSearchModel'
         },
 
         useSimpleItems: true,
@@ -60,10 +60,19 @@ Ext.define('YzMobile.view.contact.ContactSearch', {
         ]
     },
 
+    listeners: {
+        itemtap: function (list, index, target, record, e, eOpts) {
+            debugger;
+            var popup = Ext.create('YzMobile.view.contact.ContactPopup');
+            popup.onDataSet(record);
+            popup.showBy(target);
+        }
+    },
+
     onSearchKeyUp: function (field) {
         //get the store and the value of the field
         var value = field.getValue(),
-            store = Ext.getStore('ContactStore');
+            store = Ext.getStore('ContactSearchStore');
 
         var me = this;
 
@@ -85,7 +94,7 @@ Ext.define('YzMobile.view.contact.ContactSearch', {
     onSearchClearIconTap: function () {
         var me = this;
         //call the clearFilter method on the store instance
-        Ext.getStore('ContactStore').clearFilter();
+        Ext.getStore('ContactSearchStore').clearFilter();
         me.getStore().removeAll();
     }
 });
