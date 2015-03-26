@@ -1,2 +1,2 @@
 // @tag full-page
-// @require E:\project\鄞州水雨情\YzMobile\app.js
+// @require D:\kukiss\code\Sencha Touch Work\YzMobile\app.js
